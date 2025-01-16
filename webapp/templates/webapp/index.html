@@ -1,0 +1,20 @@
+{% extends 'webapp/base.html' %} {% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <h1 class="mb-4">Welcome</h1>
+      <div class="d-grid gap-3">
+        {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }}!</p>
+        <a href="{% url 'logout' %}" class="btn btn-danger btn-lg">Logout</a>
+        {% else %}
+        <a href="{% url 'my-login' %}" class="btn btn-primary btn-lg">Login</a>
+        <a href="" class="btn btn-success btn-lg">Register</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
