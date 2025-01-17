@@ -5,10 +5,13 @@ from .forms import ProductForm, UserCreationForm , LoginForm
 from django.contrib.auth import authenticate, login, logout
 
 from django.contrib.auth.decorators import login_required
+
+
+
 def home(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
     return render(request, 'webapp/index.html')
-
-
 
 
 def my_login(request):
@@ -21,7 +24,7 @@ def my_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return render(request, 'webapp/dashboard.html')
+                return redirect('dashboard')
 
             return render(request, 'webapp/index.html')
     context = {'form': form}
