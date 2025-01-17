@@ -1,9 +1,30 @@
-{% extends 'webapp/base.html' %}
-
-{% block content %}
+{% extends 'webapp/base.html' %} {% block content %}
 <div class="row">
-    <div class="col-md-12 p-5">
-        <h1>Welcome, {{ user.username }}!</h1>
+  <div class="col-md-12 p-5">
+    <h1>Welcome, {{ user.username }}!</h1>
+  </div>
+  <div class="col-md-12 p-5">
+    <div class="d-flex justify-content-end mb-3">
+      <a href="{% url 'create-product' %}" class="btn btn-primary">Create New Product</a>
     </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in products %}
+        <tr>
+          <td>{{ product.name }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.description }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 {% endblock %}
