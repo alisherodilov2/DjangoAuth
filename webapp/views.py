@@ -5,7 +5,7 @@ from .forms import ProductForm, UserCreationForm , LoginForm
 from django.contrib.auth import authenticate, login, logout
 
 from django.contrib.auth.decorators import login_required
-
+from django.http import JsonResponse
 
 
 def home(request):
@@ -75,3 +75,18 @@ def create_product(request):
     return render(request, 'webapp/create-product.html', context=context)
 
     
+
+
+def get_all_products(request):
+    products = Products.objects.all()
+    products_list = []
+        
+    for product in products:
+        products_list.append({
+                 'id': product.id,
+                'name': product.name,
+                'price': str(product.price),
+                'description': product.description
+            })
+            
+        return JsonResponse({'products': products_list})
